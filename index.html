@@ -418,7 +418,118 @@ window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();window.__ch
 function init(){render();renderChinaCard()}
 init();
 </script>
-</body>
+
+<style id="chinago-tech-luxe-v4">
+/* CHINAGO TECH LUXE V4 — cinematic, precision, premium */
+:root{
+  --cg-ink:#071014; --cg-cyan:#73e8ff; --cg-cyan2:#b8f6ff; --cg-red:#ff4a3d;
+  --cg-glass:rgba(255,255,255,.64); --cg-edge:rgba(10,22,28,.11);
+}
+body{letter-spacing:-.005em}
+body:after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.16;
+  background:radial-gradient(circle at 50% -10%,rgba(255,255,255,.55),transparent 32%),
+             linear-gradient(115deg,transparent 0 47%,rgba(115,232,255,.035) 50%,transparent 53%);
+  mix-blend-mode:screen;
+}
+.top{height:76px}
+.top:after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(115,232,255,.42),rgba(255,74,61,.18),transparent);
+}
+.brand{font-size:22px}
+.brand:before{
+  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;margin:0 9px 3px 0;
+  background:var(--cg-cyan);box-shadow:0 0 16px var(--cg-cyan);
+}
+.nav button{transition:transform .22s ease,background .22s ease,box-shadow .22s ease}
+.nav button:hover{transform:translateY(-1px)}
+.nav button.active:after{
+  content:"";position:absolute;left:12px;right:12px;bottom:-9px;height:2px;
+  background:var(--cg-cyan);box-shadow:0 0 12px rgba(115,232,255,.85)
+}
+.heroMain{
+  min-height:430px;overflow:hidden;
+  background:
+   radial-gradient(circle at 76% 30%,rgba(115,232,255,.16),transparent 20%),
+   radial-gradient(circle at 86% 76%,rgba(255,74,61,.15),transparent 22%),
+   linear-gradient(135deg,#05090b 0%,#0a1216 48%,#10181c 100%);
+}
+.heroMain .heroCopy{position:relative;z-index:2}
+.heroMain:before{
+  content:"";position:absolute;inset:22px;border:1px solid rgba(184,246,255,.08);
+  background:
+    linear-gradient(90deg,transparent 49.8%,rgba(115,232,255,.055) 50%,transparent 50.2%),
+    linear-gradient(transparent 49.8%,rgba(115,232,255,.035) 50%,transparent 50.2%);
+  background-size:100% 100%,100% 100%;pointer-events:none;
+}
+.heroMain:after{
+  content:"";position:absolute;right:-120px;top:20px;width:520px;height:520px;
+  border:1px solid rgba(115,232,255,.13);border-radius:50%;
+  box-shadow:0 0 0 38px rgba(115,232,255,.025),0 0 0 76px rgba(115,232,255,.018);
+  background:conic-gradient(from 210deg,transparent 0 18%,rgba(115,232,255,.08) 20%,transparent 25% 68%,rgba(255,74,61,.06) 72%,transparent 77%);
+}
+.hero h1{font-size:clamp(48px,6.4vw,92px);line-height:.91;max-width:920px}
+.hero h1:after{width:64px;height:2px;margin-top:24px}
+.hero .eyebrow{font-size:10px}
+.hero .cta{min-height:48px}
+.homeTools{grid-template-columns:repeat(6,minmax(0,1fr));}
+.toolTile{
+  min-height:160px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;
+  transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease;
+}
+.toolTile:hover{transform:translateY(-4px)}
+.toolTile .ico{font-size:24px}
+.toolTile h3{font-size:16px;letter-spacing:-.025em}
+.toolTile p{font-size:12px;color:#667278}
+.toolTile:nth-child(1):before,.toolTile:nth-child(3):before{background:var(--cg-red)}
+.toolTile:nth-child(2):before,.toolTile:nth-child(4):before,.toolTile:nth-child(5):before,.toolTile:nth-child(6):before{background:var(--cg-cyan)}
+.section{position:relative}
+.section:before{
+  content:"";position:absolute;left:0;top:0;width:1px;height:34px;
+  background:linear-gradient(var(--cg-cyan),transparent);opacity:.5
+}
+.sectionHead{padding-left:12px}
+.sectionHead h2{letter-spacing:-.045em}
+.card,.panel,.serviceCard,.lifeCard,.moreItem,.quick,.dish,.phrase,.step{
+  border-radius:8px;box-shadow:0 16px 50px rgba(7,16,20,.055);
+}
+.card,.panel{position:relative;overflow:hidden}
+.card:before,.panel:before,.serviceCard:before{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,rgba(115,232,255,.0),rgba(115,232,255,.35),rgba(255,74,61,.12),transparent);
+}
+.card:hover,.panel:hover,.serviceCard:hover{transform:translateY(-2px);transition:transform .24s ease,box-shadow .24s ease}
+.primary{border:1px solid rgba(115,232,255,.16)}
+.primary:not(.ghost):hover{box-shadow:0 0 0 1px rgba(115,232,255,.15),0 12px 28px rgba(7,16,20,.18)}
+.primary.ghost:hover{background:rgba(115,232,255,.07);border-color:rgba(115,232,255,.32)}
+.tag,.chip{border-radius:4px}
+.serviceCard{padding:24px}
+.svcIcon{filter:drop-shadow(0 0 9px rgba(115,232,255,.18))}
+.serviceStatus.on{color:#149bb5}
+.serviceResult,.answerCard,.resultBox{
+  position:relative;border-radius:7px;box-shadow:inset 0 1px 0 rgba(255,255,255,.45)
+}
+.notice{
+  background:linear-gradient(90deg,rgba(115,232,255,.07),rgba(255,255,255,.5));
+  border:1px solid rgba(115,232,255,.16);border-left:2px solid var(--cg-cyan);
+}
+.field label{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.1em;font-size:9px}
+.bottom button.active{color:#071014}
+.bottom button.active:after{
+  content:"";position:absolute;left:50%;bottom:7px;width:4px;height:4px;border-radius:50%;
+  transform:translateX(-50%);background:var(--cg-cyan);box-shadow:0 0 9px var(--cg-cyan)
+}
+@media(max-width:1000px){.homeTools{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:640px){
+  .top{height:66px}.brand{font-size:19px}.heroMain{min-height:390px}
+  .hero h1{font-size:clamp(42px,14vw,64px)}
+  .homeTools{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .toolTile{min-height:135px;padding:17px}
+  .heroMain:after{right:-250px;top:40px;opacity:.6}
+}
+</style>
+\n</body>
 </html>
 <style id="chinago-tech-luxe-v3">
 /* CHINAGO TECH LUXE V3 */
