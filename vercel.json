@@ -5,6 +5,12 @@
   "installCommand": "",
   "outputDirectory": "public",
   "trailingSlash": false,
+  "builds": [
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/:path*",
