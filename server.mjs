@@ -1,4 +1,5 @@
 import "dotenv/config";
+import crypto from "node:crypto";
 import express from "express";
 import cors from "cors";
 import OpenAI from "openai";
@@ -21,6 +22,26 @@ const publicSupabase = process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
 const rateBuckets = new Map();
+const demoLeadQueue = [];
+const demoReferralClicks = new Map();
+function makeLeadReference(){
+  return "CG-"+new Date().toISOString().slice(0,10).replace(/-/g,"")+"-"+crypto.randomBytes(3).toString("hex").toUpperCase();
+}
+function leadWebhookConfigured(){ return Boolean(process.env.LEAD_WEBHOOK_URL); }
+async function deliverLeadWebhook(lead){
+  if(!process.env.LEAD_WEBHOOK_URL) return {configured:false,delivered:false};
+  const body=JSON.stringify({event:"chinago.lead.created",lead});
+  const headers={"content-type":"application/json","x-chinago-event":"lead.created"};
+  if(process.env.LEAD_WEBHOOK_SECRET) headers["x-chinago-signature"]=crypto.createHmac("sha256",process.env.LEAD_WEBHOOK_SECRET).update(body).digest("hex");
+  try{
+    const r=await fetch(process.env.LEAD_WEBHOOK_URL,{method:"POST",headers,body});
+    return {configured:true,delivered:r.ok,status:r.status};
+  }catch(e){ return {configured:true,delivered:false,error:e.message||"Webhook delivery failed"}; }
+}
+function adminKeyAuthorized(req){
+  const expected=process.env.ADMIN_API_KEY;
+  return Boolean(expected && String(req.headers["x-admin-key"]||"")===expected);
+}
 function rateLimit(max=30, windowMs=60000) {
   return (req,res,next)=>{
     const key=(req.ip||"unknown")+":"+req.path;
@@ -160,6 +181,18 @@ app.get("/api/config", (req,res)=>res.json({
 
 app.get("/api/cities", async (req,res)=>res.json(await getCities()));
 
+app.get("/api/monetization", (req,res)=>res.json({
+  lead_capture:{database:Boolean(supabase),webhook:leadWebhookConfigured(),demo_queue:!supabase},
+  providers:{
+    booking_com:{configured:Boolean(process.env.BOOKING_COM_API_KEY&&process.env.BOOKING_COM_AFFILIATE_ID),required:["BOOKING_COM_API_KEY","BOOKING_COM_AFFILIATE_ID"]},
+    hotel:{configured:Boolean(process.env.HOTEL_PROVIDER_URL),required:["HOTEL_PROVIDER_URL","HOTEL_PROVIDER_TOKEN"]},
+    transfer:{configured:Boolean(process.env.TRANSFER_PROVIDER_URL),required:["TRANSFER_PROVIDER_URL","TRANSFER_PROVIDER_TOKEN"]},
+    experience:{configured:Boolean(process.env.EXPERIENCE_PROVIDER_URL),required:["EXPERIENCE_PROVIDER_URL","EXPERIENCE_PROVIDER_TOKEN"]},
+    train:{configured:Boolean(process.env.TRAIN_PROVIDER_URL),required:["TRAIN_PROVIDER_URL","TRAIN_PROVIDER_TOKEN"]},
+    ticket:{configured:Boolean(process.env.TICKET_PROVIDER_URL),required:["TICKET_PROVIDER_URL","TICKET_PROVIDER_TOKEN"]}
+  },
+  commission:{model:"provider/affiliate",storage:Boolean(supabase),note:"Do not publish or hard-code provider credentials."}
+}));
 app.get("/api/services", (req,res)=>res.json({
   services:[
     {id:"airport-transfer",provider:"transfer",configured:Boolean(process.env.TRANSFER_PROVIDER_URL)},
@@ -390,11 +423,42 @@ async function providerProxy(req,res,category,fn){
 
 app.post("/api/booking-leads", async (req,res)=>{
   const body=req.body||{}; const user=await getUserFromBearer(req);
-  if(!supabase) return res.json({ok:true,mode:"demo",message:"Lead captured in demo mode."});
-  const lead={user_id:user?.id||null,offer_id:body.offer_id||null,category:String(body.category||"unknown").slice(0,40),status:"new",customer_name:String(body.customer_name||"").slice(0,100),customer_email:String(body.customer_email||"").slice(0,160),customer_phone:String(body.customer_phone||"").slice(0,50),travel_date:body.travel_date||null,party_size:body.party_size?Number(body.party_size):null,request_json:body.request_json||{},source:"chinago"};
+  const reference=makeLeadReference();
+  const lead={reference,user_id:user?.id||null,offer_id:body.offer_id||null,category:String(body.category||"unknown").slice(0,40),status:"new",customer_name:String(body.customer_name||"").slice(0,100),customer_email:String(body.customer_email||"").slice(0,160),customer_phone:String(body.customer_phone||"").slice(0,50),travel_date:body.travel_date||null,party_size:body.party_size?Number(body.party_size):null,request_json:body.request_json||{},source:"chinago"};
+  if(!supabase){
+    demoLeadQueue.unshift({...lead,created_at:new Date().toISOString()});
+    if(demoLeadQueue.length>100) demoLeadQueue.length=100;
+    const delivery=await deliverLeadWebhook(lead);
+    return res.json({ok:true,mode:"demo",lead_id:reference,reference,delivery,message:delivery.delivered?"Request forwarded to ChinaGo lead webhook.":"Request received by the current server; connect a database or lead webhook for durable storage."});
+  }
   const {data,error}=await supabase.from("booking_leads").insert(lead).select().single();
   if(error) return res.status(500).json({error:error.message});
-  res.json({ok:true,lead_id:data.id});
+  const delivery=await deliverLeadWebhook({...lead,id:data.id});
+  res.json({ok:true,lead_id:data.id,reference,delivery});
+});
+
+app.get("/api/admin/lead-queue", async (req,res)=>{
+  const user=await getUserFromBearer(req);
+  if(!isAdmin(user) && !adminKeyAuthorized(req)) return res.status(403).json({error:"Admin access required"});
+  if(supabase){
+    const {data,error}=await supabase.from("booking_leads").select("*").order("created_at",{ascending:false}).limit(100);
+    if(error) return res.status(500).json({error:error.message});
+    return res.json({mode:"database",leads:data||[]});
+  }
+  res.json({mode:"demo",leads:demoLeadQueue});
+});
+
+app.post("/api/referrals/click", async (req,res)=>{
+  const b=req.body||{};
+  const provider=String(b.provider||"unknown").slice(0,60);
+  const category=String(b.category||"unknown").slice(0,60);
+  const key=provider+":"+category;
+  demoReferralClicks.set(key,(demoReferralClicks.get(key)||0)+1);
+  if(supabase){
+    const user=await getUserFromBearer(req);
+    await supabase.from("booking_events").insert({user_id:user?.id||null,offer_id:b.offer_id||null,category,event_type:"affiliate_click",external_url:String(b.external_url||"").slice(0,500),metadata:b.metadata||{}});
+  }
+  res.json({ok:true,provider,category,count:demoReferralClicks.get(key)});
 });
 
 app.get("/api/booking-leads", async (req,res)=>{
