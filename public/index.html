@@ -127,27 +127,51 @@ const ROUTES=[
  {city:"Urumqi",from:"Urumqi Airport",to:"International Grand Bazaar",tip:"Use 新疆国际大巴扎 as the Chinese destination."}
 ];
 const LIFE=[
- {icon:"📦",title:"Food delivery",text:"Meituan and other local services may use Chinese-only menus. Ask the hotel front desk if you need help with an address or phone verification."},
- {icon:"🚲",title:"Shared bikes",text:"Look for the QR code on the bike. Availability, deposit and verification rules vary by provider and city."},
- {icon:"💊",title:"Pharmacy",text:"For medical needs, show the exact medicine name or ask a pharmacist. ChinaGo should not replace professional medical advice."},
- {icon:"📶",title:"SIM / eSIM",text:"Check roaming or eSIM support before arrival. Keep your passport and the phone number that can receive verification messages."},
- {icon:"🚻",title:"Public toilets",text:"卫生间 means restroom. 洗手间 is also common. In some places toilet paper may not be provided in the stall."},
- {icon:"🛒",title:"Buying something",text:"多少钱 means “how much?” 太贵了 means “too expensive.” You can show the number on a calculator if needed."},
+ {icon:"📦",title:"Food delivery",text:"Meituan and other local services may use Chinese-only menus. Keep your hotel Chinese address and room number ready; ask the front desk if a courier cannot find you."},
+ {icon:"🚲",title:"Shared bikes",text:"Look for the QR code on the bike. Availability, deposit and verification rules vary by provider and city. Park only in permitted areas."},
+ {icon:"💊",title:"Pharmacy",text:"For medical needs, show the exact medicine name or ask a pharmacist. ChinaGo does not replace professional medical advice."},
+ {icon:"📶",title:"SIM / eSIM",text:"Check roaming or eSIM support before arrival. Keep the phone number that can receive verification messages and your passport when registration is required."},
+ {icon:"🚻",title:"Public toilets",text:"卫生间 means restroom. 洗手间 is also common. In some places toilet paper may not be provided inside the stall."},
+ {icon:"🛒",title:"Shopping",text:"多少钱 means “how much?” 太贵了 means “too expensive.” Use a calculator or show the amount on your phone if language is difficult."},
  {icon:"🏨",title:"Hotel check-in",text:"Keep your passport ready. Ask: 可以用护照办理入住吗？ — Can I check in using my passport?"},
- {icon:"📦",title:"Send a package",text:"快递 means courier/express delivery. Ask the hotel or a local courier shop which service accepts foreign passports."},
- {icon:"🚆",title:"Train station",text:"Keep your passport and train number ready. Chinese station names are useful when asking staff for directions."}
+ {icon:"📦",title:"Send a package",text:"快递 means courier/express delivery. Ask the hotel or courier shop which service accepts your document and where the parcel can be collected."},
+ {icon:"🚆",title:"Train station",text:"Keep your passport and train number ready. Chinese station names are useful when asking staff for directions."},
+ {icon:"🚕",title:"Taxi / ride-hailing",text:"Show the full Chinese hotel or attraction name. If the driver cannot find you, move to a clear pickup point and share the entrance name."},
+ {icon:"🏪",title:"Convenience store",text:"便利店 means convenience store. Useful phrases: 这个多少钱？ / 可以刷卡吗？ / 有袋子吗？"},
+ {icon:"🧳",title:"Left luggage",text:"行李寄存 means luggage storage. Ask a station, hotel or attraction whether storage is available before leaving valuables."},
+ {icon:"📶",title:"Wi-Fi",text:"无线网络 means Wi-Fi. Ask: Wi-Fi密码是多少？ — What is the Wi-Fi password?"},
+ {icon:"🧾",title:"Receipt / fapiao",text:"发票 means invoice/fapiao. If you need one, ask the merchant before or during payment because the process varies."},
+ {icon:"🍵",title:"Tea / cafe",text:"茶馆 means teahouse and 咖啡店 means coffee shop. Ask for 无糖 (no sugar) or 少冰 (less ice) when relevant."},
+ {icon:"🎟️",title:"Tickets",text:"门票 means admission ticket. Check the official venue channel for opening times, ticket rules and identity requirements."},
+ {icon:"🛍️",title:"Tax refund shopping",text:"If eligible, ask the retailer whether it participates in departure tax refund procedures and keep the required receipt and documentation."},
+ {icon:"♿",title:"Accessibility",text:"Ask for 无障碍通道 — accessible route. Availability varies by venue; ask staff for the nearest accessible entrance or elevator."}
 ];
 const PHRASES=[
  {cat:"taxi",title:"Take me here",cn:"请送我到这个地方，谢谢。",en:"Please take me to this place, thank you."},
+ {cat:"taxi",title:"Hotel address",cn:"请送我到这个酒店，这是地址。",en:"Please take me to this hotel. Here is the address."},
+ {cat:"taxi",title:"Stop here",cn:"请在这里停车，谢谢。",en:"Please stop here, thank you."},
+ {cat:"taxi",title:"Where is the pickup point?",cn:"请问网约车在哪里上车？",en:"Where is the ride-hailing pickup point?"},
  {cat:"food",title:"Not spicy",cn:"请不要放辣椒，一点辣都不要。",en:"Please don't add chili. No spice at all."},
+ {cat:"food",title:"Less spicy",cn:"请少放一点辣椒，谢谢。",en:"Please use less chili."},
  {cat:"food",title:"No pork",cn:"我不吃猪肉，请不要放猪肉。",en:"I don't eat pork. Please don't add pork."},
+ {cat:"food",title:"No beef",cn:"我不吃牛肉，请不要放牛肉。",en:"I don't eat beef. Please don't add beef."},
+ {cat:"food",title:"Vegetarian",cn:"我是素食者，请不要放肉。",en:"I am vegetarian. Please do not add meat."},
  {cat:"food",title:"Allergy",cn:"我对花生过敏，这道菜里有花生吗？",en:"I am allergic to peanuts. Does this dish contain peanuts?"},
+ {cat:"food",title:"No cilantro",cn:"请不要放香菜，谢谢。",en:"Please do not add cilantro."},
+ {cat:"food",title:"Water",cn:"请给我一杯温水，谢谢。",en:"Please give me a glass of warm water."},
  {cat:"help",title:"I need help",cn:"你好，我需要帮助。",en:"Hello, I need help."},
  {cat:"help",title:"Lost passport",cn:"我的护照丢了，我需要帮助。",en:"I lost my passport and need help."},
+ {cat:"help",title:"Call police",cn:"请帮我联系警察。",en:"Please help me contact the police."},
+ {cat:"help",title:"Medical help",cn:"我需要看医生，请帮帮我。",en:"I need to see a doctor. Please help me."},
  {cat:"life",title:"Where is the restroom?",cn:"请问卫生间在哪里？",en:"Where is the restroom?"},
  {cat:"life",title:"How much?",cn:"这个多少钱？",en:"How much is this?"},
+ {cat:"life",title:"Wi-Fi password",cn:"请问Wi-Fi密码是多少？",en:"What is the Wi-Fi password?"},
+ {cat:"life",title:"Can I get a receipt?",cn:"可以给我发票吗？",en:"Can I get an invoice/fapiao?"},
  {cat:"hotel",title:"Passport check-in",cn:"可以用护照办理入住吗？",en:"Can I check in using my passport?"},
- {cat:"transport",title:"Which exit?",cn:"请问从哪个出口出去？",en:"Which exit should I use?"}
+ {cat:"hotel",title:"I have a reservation",cn:"我有预订，这是我的护照。",en:"I have a reservation. Here is my passport."},
+ {cat:"transport",title:"Which exit?",cn:"请问从哪个出口出去？",en:"Which exit should I use?"},
+ {cat:"transport",title:"Which platform?",cn:"请问在哪个站台？",en:"Which platform is it?"},
+ {cat:"transport",title:"Is this the right train?",cn:"请问这是去这里的火车吗？",en:"Is this the train to this destination?"}
 ];
 const state={tab:"home",food:{spice:"any",avoid:"",text:"",region:"all",cat:"all"},move:{city:"Beijing",from:"",to:"",mode:"metro"},talkText:"",talkCat:"taxi",chat:[{role:"ai",text:"Hi! I’m ChinaGo. I help with the practical stuff in China — food, transport, Chinese phrases, payments and everyday life."}],chatLoading:false,live:""};
 const app=document.getElementById("app");
