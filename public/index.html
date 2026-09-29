@@ -507,6 +507,7 @@ function localQuickSolve(q){
   return ["ChinaGo quick solve","Start with Food, Move, Talk, Pay or Life. If you describe the exact problem, ChinaGo can route it to the most relevant tool."];
 }
 function solveCommand(){
+  track("command_solve",{query:(($("#commandInput")||{}).value||"").trim()});
   const q=($("#commandInput")||{}).value?.trim();
   if(!q)return toast("Describe the problem first");
   const box=$("#commandAnswer");box.innerHTML='<div class="answerCard"><b>ChinaGo is working on it…</b>Finding the most practical next step.</div>';
