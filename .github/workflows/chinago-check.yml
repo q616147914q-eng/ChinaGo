@@ -1,0 +1,20 @@
+name: ChinaGo syntax check
+on:
+  push:
+    branches: ["main"]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check frontend JavaScript
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path("public/index.html").read_text()
+          m=re.search(r"<script>([\s\S]*?)</script>",s)
+          assert m, "script block missing"
+          Path("/tmp/chinago.js").write_text(m.group(1))
+          PY
+          node --check /tmp/chinago.js
