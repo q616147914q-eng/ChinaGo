@@ -1,10 +1,17 @@
 {
-  "name":"ChinaGo — Your Everyday China Companion",
-  "short_name":"ChinaGo",
-  "start_url":"/",
-  "display":"standalone",
-  "background_color":"#f5f5f1",
-  "theme_color":"#111111",
-  "description":"China, without the confusion.",
-  "icons":[]
+  "name": "ChinaGo — Your Everyday China Companion",
+  "short_name": "ChinaGo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f5f1",
+  "theme_color": "#111111",
+  "description": "China, without the confusion.",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
 }
