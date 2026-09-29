@@ -26,16 +26,64 @@ const TOOLS=[
  {id:"help",icon:"🆘",title:"Need Help?",sub:"Useful emergency phrases",desc:"Fast phrases for lost items, medical help, police and urgent situations."}
 ];
 const DISHES=[
- {cn:"宫保鸡丁",en:"Kung Pao Chicken",taste:"savory, slightly sweet and spicy",spice:2,contains:"peanuts",good:"A familiar first Chinese dish; ask for less spicy if needed."},
- {cn:"番茄炒蛋",en:"Tomato & Egg",taste:"soft, savory and slightly sweet",spice:0,contains:"egg",good:"Mild and easy to share."},
- {cn:"鱼香肉丝",en:"Fish-Fragrant Shredded Pork",taste:"savory, sweet, sour and spicy",spice:2,contains:"pork",good:"Despite the name, it usually does not contain fish."},
- {cn:"水煮牛肉",en:"Sichuan Boiled Beef",taste:"very spicy, numbing and savory",spice:4,contains:"beef",good:"Ask for less chili if you are not used to Sichuan food."},
- {cn:"麻婆豆腐",en:"Mapo Tofu",taste:"spicy, numbing and savory",spice:4,contains:"soy, often pork",good:"Excellent with rice; ask whether pork is included."},
- {cn:"清炒时蔬",en:"Stir-fried Seasonal Vegetables",taste:"light and savory",spice:0,contains:"usually vegetables only",good:"Useful as a safe side dish."},
- {cn:"炒饭",en:"Fried Rice",taste:"savory",spice:0,contains:"egg is common",good:"Simple option; ask about meat or egg."},
- {cn:"兰州牛肉面",en:"Lanzhou Beef Noodles",taste:"savory beef broth",spice:1,contains:"beef, wheat",good:"Ask for no chili if preferred."},
- {cn:"北京烤鸭",en:"Peking Duck",taste:"crispy, savory and slightly sweet",spice:0,contains:"duck, wheat wrappers",good:"A classic sharing dish."},
- {cn:"小笼包",en:"Soup Dumplings",taste:"savory, juicy",spice:0,contains:"pork is common, wheat",good:"Let them cool before biting."}
+ {cn:"宫保鸡丁",en:"Kung Pao Chicken",taste:"local specialty",spice:2,contains:"peanuts",region:"Sichuan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"麻婆豆腐",en:"Mapo Tofu",taste:"local specialty",spice:4,contains:"soy, often pork",region:"Sichuan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"鱼香肉丝",en:"Fish-Fragrant Shredded Pork",taste:"local specialty",spice:2,contains:"pork",region:"Sichuan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"水煮牛肉",en:"Sichuan Boiled Beef",taste:"local specialty",spice:4,contains:"beef",region:"Sichuan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"回锅肉",en:"Twice-Cooked Pork",taste:"local specialty",spice:3,contains:"pork",region:"Sichuan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"辣子鸡",en:"Chongqing Spicy Chicken",taste:"local specialty",spice:4,contains:"chicken",region:"Sichuan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"酸菜鱼",en:"Sour Pickled Fish",taste:"local specialty",spice:2,contains:"fish",region:"Sichuan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"担担面",en:"Dan Dan Noodles",taste:"local specialty",spice:3,contains:"wheat, peanuts, often pork",region:"Sichuan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"北京烤鸭",en:"Peking Duck",taste:"local specialty",spice:0,contains:"duck, wheat",region:"Beijing",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"炸酱面",en:"Beijing Zhajiang Noodles",taste:"local specialty",spice:1,contains:"wheat, often pork",region:"Beijing",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"涮羊肉",en:"Beijing Hot Pot",taste:"local specialty",spice:1,contains:"lamb",region:"Beijing",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"京酱肉丝",en:"Beijing Pork in Sweet Bean Sauce",taste:"local specialty",spice:1,contains:"pork, wheat",region:"Beijing",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"小笼包",en:"Soup Dumplings",taste:"local specialty",spice:0,contains:"pork, wheat",region:"Shanghai",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"生煎包",en:"Pan-Fried Pork Buns",taste:"local specialty",spice:0,contains:"pork, wheat",region:"Shanghai",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"红烧肉",en:"Braised Pork Belly",taste:"local specialty",spice:0,contains:"pork",region:"Shanghai",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"上海炒面",en:"Shanghai Fried Noodles",taste:"local specialty",spice:1,contains:"wheat, often pork",region:"Shanghai",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"葱油拌面",en:"Scallion Oil Noodles",taste:"local specialty",spice:0,contains:"wheat",region:"Shanghai",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"糖醋排骨",en:"Sweet and Sour Ribs",taste:"local specialty",spice:0,contains:"pork",region:"Jiangsu",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"扬州炒饭",en:"Yangzhou Fried Rice",taste:"local specialty",spice:0,contains:"egg, shrimp or pork",region:"Jiangsu",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"盐水鸭",en:"Nanjing Salted Duck",taste:"local specialty",spice:0,contains:"duck",region:"Jiangsu",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"东坡肉",en:"Dongpo Pork",taste:"local specialty",spice:0,contains:"pork",region:"Zhejiang",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"西湖醋鱼",en:"West Lake Fish",taste:"local specialty",spice:0,contains:"fish",region:"Zhejiang",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"龙井虾仁",en:"Longjing Tea Shrimp",taste:"local specialty",spice:0,contains:"shrimp",region:"Zhejiang",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"叫花鸡",en:"Beggar's Chicken",taste:"local specialty",spice:0,contains:"chicken",region:"Zhejiang",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"兰州牛肉面",en:"Lanzhou Beef Noodles",taste:"local specialty",spice:1,contains:"beef, wheat",region:"Gansu",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"羊肉泡馍",en:"Lamb Paomo",taste:"local specialty",spice:1,contains:"lamb, wheat",region:"Shaanxi",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"肉夹馍",en:"Roujiamo",taste:"local specialty",spice:1,contains:"pork or beef, wheat",region:"Shaanxi",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"凉皮",en:"Cold Rice Noodles",taste:"local specialty",spice:2,contains:"wheat or rice",region:"Shaanxi",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"Biangbiang面",en:"Biangbiang Noodles",taste:"local specialty",spice:2,contains:"wheat",region:"Shaanxi",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"胡辣汤",en:"Pepper Soup",taste:"local specialty",spice:2,contains:"wheat, meat may vary",region:"Henan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"烩面",en:"Henan Hui Mian",taste:"local specialty",spice:1,contains:"wheat, often lamb",region:"Henan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"开封灌汤包",en:"Kaifeng Soup Dumplings",taste:"local specialty",spice:0,contains:"pork, wheat",region:"Henan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"道口烧鸡",en:"Daokou Braised Chicken",taste:"local specialty",spice:0,contains:"chicken",region:"Henan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"黄焖鸡米饭",en:"Braised Chicken with Rice",taste:"local specialty",spice:2,contains:"chicken, soy",region:"Shandong",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"九转大肠",en:"Jiuzhuan Intestines",taste:"local specialty",spice:1,contains:"pork offal",region:"Shandong",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"煎饼卷大葱",en:"Shandong Pancake with Scallion",taste:"local specialty",spice:0,contains:"wheat",region:"Shandong",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"番茄炒蛋",en:"Tomato & Egg",taste:"local specialty",spice:0,contains:"egg",region:"Nationwide",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"清炒时蔬",en:"Stir-fried Seasonal Vegetables",taste:"local specialty",spice:0,contains:"vegetables",region:"Nationwide",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"炒饭",en:"Fried Rice",taste:"local specialty",spice:0,contains:"egg is common",region:"Nationwide",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"酸辣汤",en:"Hot and Sour Soup",taste:"local specialty",spice:2,contains:"egg, soy may vary",region:"Nationwide",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"佛跳墙",en:"Buddha Jumps Over the Wall",taste:"local specialty",spice:0,contains:"multiple seafood/meats",region:"Fujian",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"沙茶面",en:"Fujian Shacha Noodles",taste:"local specialty",spice:1,contains:"seafood/meat varies, peanuts may occur",region:"Fujian",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"蚵仔煎",en:"Oyster Omelette",taste:"local specialty",spice:1,contains:"oyster, egg",region:"Fujian",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"白切鸡",en:"Poached Chicken",taste:"local specialty",spice:0,contains:"chicken",region:"Guangdong",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"烧鹅",en:"Roast Goose",taste:"local specialty",spice:0,contains:"goose",region:"Guangdong",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"虾饺",en:"Har Gow",taste:"local specialty",spice:0,contains:"shrimp, wheat",region:"Guangdong",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"肠粉",en:"Rice Noodle Rolls",taste:"local specialty",spice:0,contains:"rice, fillings vary",region:"Guangdong",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"煲仔饭",en:"Claypot Rice",taste:"local specialty",spice:1,contains:"rice, meat varies",region:"Guangdong",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"海南鸡饭",en:"Hainanese Chicken Rice",taste:"local specialty",spice:0,contains:"chicken",region:"Hainan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"椰子鸡",en:"Coconut Chicken Hot Pot",taste:"local specialty",spice:0,contains:"chicken, coconut",region:"Hainan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"过桥米线",en:"Crossing-the-Bridge Rice Noodles",taste:"local specialty",spice:0,contains:"rice, meat varies",region:"Yunnan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"汽锅鸡",en:"Steam-Pot Chicken",taste:"local specialty",spice:0,contains:"chicken",region:"Yunnan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"傣味手抓饭",en:"Dai-Style Hand Rice",taste:"local specialty",spice:1,contains:"meat varies",region:"Yunnan",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"螺蛳粉",en:"Luosifen",taste:"local specialty",spice:3,contains:"rice noodles, bamboo shoots",region:"Guangxi",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"桂林米粉",en:"Guilin Rice Noodles",taste:"local specialty",spice:1,contains:"rice, meat varies",region:"Guangxi",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"新疆大盘鸡",en:"Xinjiang Big Plate Chicken",taste:"local specialty",spice:2,contains:"chicken, wheat",region:"Xinjiang",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"羊肉串",en:"Xinjiang Lamb Skewers",taste:"local specialty",spice:2,contains:"lamb",region:"Xinjiang",good:"Check ingredients and spice level with the restaurant."},
+ {cn:"手抓羊肉",en:"Hand-Pulled Lamb",taste:"local specialty",spice:0,contains:"lamb",region:"Northwest",good:"Check ingredients and spice level with the restaurant."}
 ];
 const LIFE=[
  {icon:"📦",title:"Food delivery",text:"Meituan and other local services may use Chinese-only menus. Ask the hotel front desk if you need help with an address or phone verification."},
@@ -60,7 +108,7 @@ const PHRASES=[
  {cat:"hotel",title:"Passport check-in",cn:"可以用护照办理入住吗？",en:"Can I check in using my passport?"},
  {cat:"transport",title:"Which exit?",cn:"请问从哪个出口出去？",en:"Which exit should I use?"}
 ];
-const state={tab:"home",food:{spice:"any",avoid:"",text:""},move:{city:"Beijing",from:"",to:"",mode:"metro"},talkText:"",talkCat:"taxi",chat:[{role:"ai",text:"Hi! I’m ChinaGo. I help with the practical stuff in China — food, transport, Chinese phrases, payments and everyday life."}],chatLoading:false,live:""};
+const state={tab:"home",food:{spice:"any",avoid:"",text:"",region:"all"},move:{city:"Beijing",from:"",to:"",mode:"metro"},talkText:"",talkCat:"taxi",chat:[{role:"ai",text:"Hi! I’m ChinaGo. I help with the practical stuff in China — food, transport, Chinese phrases, payments and everyday life."}],chatLoading:false,live:""};
 const serviceState={id:"airport-transfer",city:localStorage.getItem("cg_city")||"Beijing",date:"",pax:"1",details:"",status:null,results:null};
 const app=document.getElementById("app");
 const $=s=>document.querySelector(s);
