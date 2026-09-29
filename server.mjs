@@ -141,7 +141,7 @@ async function getCities() {
 app.get("/api/health", (req,res)=>res.json({
  ok:true,
   service:"ChinaGo",
-  version:"10.0.0",
+  version:"11.0.0",
   ai:aiStatus(),
   database:!!supabase,
   providers:providerStatus(),
@@ -151,7 +151,7 @@ app.get("/api/health", (req,res)=>res.json({
 
 app.get("/api/config", (req,res)=>res.json({
   supabase:{url:process.env.SUPABASE_URL||"", anonKey:process.env.SUPABASE_ANON_KEY||""},
-  version:"10.0.0",
+  version:"11.0.0",
   features:{ai:!!openai,database:!!supabase,liveSearch:!!openai,bookingCom:bookingComConfig().configured},
   ai:aiStatus()
 }));
