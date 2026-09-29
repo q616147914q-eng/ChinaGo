@@ -5,19 +5,18 @@
   "installCommand": "",
   "builds": [
     {
-      "src": "server.mjs",
-      "use": "@vercel/node"
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
   ],
-  "functions": {
-    "server.mjs": {
-      "includeFiles": "index.html"
-    }
-  },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "server.mjs"
+      "source": "/api/:path*",
+      "destination": "https://chinago.onrender.com/api/:path*"
     }
   ]
 }
