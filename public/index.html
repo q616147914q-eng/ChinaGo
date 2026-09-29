@@ -511,8 +511,8 @@ function solveCommand(){
   if(!q)return toast("Describe the problem first");
   const box=$("#commandAnswer");box.innerHTML='<div class="answerCard"><b>ChinaGo is working on it…</b>Finding the most practical next step.</div>';
   api("/api/chat",{method:"POST",body:JSON.stringify({message:q,context:{product:"ChinaGo Everyday China Companion",city:localStorage.getItem("cg_city")||"Beijing"}})})
-  .then(d=>{box.innerHTML='<div class="answerCard"><b>Next steps</b>'+esc(d.answer||"Use one of the tools below.")+'</div>'})
-  .catch(()=>{const [title,local]=localQuickSolve(q);box.innerHTML='<div class="answerCard"><b>'+title+'</b>'+esc(local)+'</div>'});
+  .then(d=>{box.innerHTML='<div class="answerCard"><b>Next steps</b>'+esc(d.answer||"Use one of the tools below.")+'</div>'+commercialBlock(q)})
+  .catch(()=>{const [title,local]=localQuickSolve(q);box.innerHTML='<div class="answerCard"><b>'+title+'</b>'+esc(local)+'</div>'+commercialBlock(q)});
 }
 function installChinaGo(){
   if(window.__chinagoInstall){window.__chinagoInstall.prompt();window.__chinagoInstall=null}
