@@ -632,4 +632,4 @@ app.delete("/api/trips/:id", async (req,res)=>{
 
 app.get("/{*splat}",(req,res)=>res.sendFile("index.html",{root:"public"}));
 
-app.listen(PORT,()=>console.log(`ChinaGo running on http://localhost:${PORT}`));
+app.listen(PORT,"0.0.0.0",()=>console.log(`ChinaGo listening on 0.0.0.0:${PORT}`));
