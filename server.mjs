@@ -42,6 +42,7 @@ app.use("/api/v7", rateLimit(20));
 app.use("/api/v8", rateLimit(30));
 app.use("/api/v9", rateLimit(40));
 app.use("/api/services", rateLimit(20));
+app.use("/api/booking-leads", rateLimit(10));
 
 app.use(express.static("public"));
 app.get("/", (req, res) => res.sendFile("index.html", { root: process.cwd() }));
