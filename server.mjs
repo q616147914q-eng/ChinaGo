@@ -41,6 +41,7 @@ app.use("/api/orders", rateLimit(20));
 app.use("/api/v7", rateLimit(20));
 app.use("/api/v8", rateLimit(30));
 app.use("/api/v9", rateLimit(40));
+app.use("/api/services", rateLimit(20));
 
 app.use(express.static("public"));
 
@@ -156,6 +157,26 @@ app.get("/api/config", (req,res)=>res.json({
 }));
 
 app.get("/api/cities", async (req,res)=>res.json(await getCities()));
+
+app.get("/api/services", (req,res)=>res.json({
+  services:[
+    {id:"airport-transfer",provider:"transfer",configured:Boolean(process.env.TRANSFER_PROVIDER_URL)},
+    {id:"private-driver",provider:"transfer",configured:Boolean(process.env.TRANSFER_PROVIDER_URL)},
+    {id:"translation",provider:"translation",configured:false},
+    {id:"local-assistance",provider:"assistance",configured:false},
+    {id:"hotel",provider:"hotel",configured:Boolean(process.env.HOTEL_PROVIDER_URL)||(Boolean(process.env.BOOKING_COM_API_KEY&&process.env.BOOKING_COM_AFFILIATE_ID))},
+    {id:"experience",provider:"experience",configured:Boolean(process.env.EXPERIENCE_PROVIDER_URL)}
+  ],
+  booking_com:Boolean(process.env.BOOKING_COM_API_KEY&&process.env.BOOKING_COM_AFFILIATE_ID)
+}));
+app.post("/api/service-search", async (req,res)=>{
+  const {serviceId="",payload={}}=req.body||{};
+  const map={"airport-transfer":searchTransfers,"private-driver":searchTransfers,"hotel":searchHotels,"experience":searchExperiences};
+  if(serviceId==="hotel" && process.env.BOOKING_COM_API_KEY && process.env.BOOKING_COM_AFFILIATE_ID) return res.json(await cachedProviderSearch("booking_com_hotel",searchBookingComHotels,payload));
+  const fn=map[serviceId];
+  if(!fn) return res.json({configured:false,items:[],provider:"chinago",message:"This service is request-based; live supplier search is not connected yet."});
+  res.json(await cachedProviderSearch(serviceId,fn,payload));
+});
 
 app.get("/api/survival", (req,res)=>res.json(survival));
 
