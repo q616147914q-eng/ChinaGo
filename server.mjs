@@ -140,7 +140,7 @@ async function getCities() {
 app.get("/api/health", (req,res)=>res.json({
  ok:true,
   service:"ChinaGo",
-  version:"9.1.0",
+  version:"9.2.0",
   ai:aiStatus(),
   database:!!supabase,
   providers:providerStatus(),
@@ -150,7 +150,7 @@ app.get("/api/health", (req,res)=>res.json({
 
 app.get("/api/config", (req,res)=>res.json({
   supabase:{url:process.env.SUPABASE_URL||"", anonKey:process.env.SUPABASE_ANON_KEY||""},
-  version:"9.1.0",
+  version:"9.2.0",
   features:{ai:!!openai,database:!!supabase,liveSearch:!!openai,bookingCom:bookingComConfig().configured},
   ai:aiStatus()
 }));
@@ -460,9 +460,9 @@ app.patch("/api/admin/leads/:id", async (req,res)=>{
 
 app.get("/api/experiences", async (req,res)=>{
   if(!supabase) return res.json([
-    {title:"Shaolin Kung Fu Experience",city:"Dengfeng",duration:"Half day",price_from:0,currency:"CNY",language:"English",provider_name:"ChinaGo partner",booking_url:"#"},
-    {title:"Luoyang Ancient Capital Food Walk",city:"Luoyang",duration:"3 hours",price_from:0,currency:"CNY",language:"English",provider_name:"ChinaGo partner",booking_url:"#"},
-    {title:"Xi'an Night Food & History Walk",city:"Xi'an",duration:"3 hours",price_from:0,currency:"CNY",language:"English",provider_name:"ChinaGo partner",booking_url:"#"}
+    {id:"shaolin-private",title:"Shaolin Temple & Kung Fu Day",city:"Dengfeng",duration:"Full day",language:"English",provider_name:"ChinaGo request desk",booking_url:"#"},
+    {id:"luoyang-grottoes",title:"Longmen Grottoes Cultural Day",city:"Luoyang",duration:"Full day",language:"English",provider_name:"ChinaGo request desk",booking_url:"#"},
+    {id:"zhengzhou-food",title:"Henan Food Discovery",city:"Zhengzhou",duration:"3–4 hours",language:"English",provider_name:"ChinaGo request desk",booking_url:"#"}
   ]);
   let q=supabase.from("experiences").select("*,cities(name_en,name_zh,slug)").eq("active",true).order("created_at",{ascending:false}).limit(100);
   if(req.query.city) q=q.eq("cities.slug",req.query.city);
@@ -525,9 +525,9 @@ app.post("/api/events/search", async (req,res)=>{
 
 app.get("/api/offers", async (req,res)=>{
   if(!supabase) return res.json([
-    {id:"demo-hotel",category:"hotel",title:"Foreigner-friendly hotels",provider_name:"Connect provider",booking_url:"#"},
-    {id:"demo-ticket",category:"ticket",title:"Attraction tickets",provider_name:"Connect provider",booking_url:"#"},
-    {id:"demo-transfer",category:"transfer",title:"Airport transfer",provider_name:"ChinaGo partner",booking_url:"#"}
+    {id:"airport-transfer",category:"Airport transfer",title:"Private airport pickup",price_from:null,currency:"CNY",provider_name:"ChinaGo request desk",booking_url:"#"},
+    {id:"private-driver",category:"Private driver",title:"Private driver for a China day trip",price_from:null,currency:"CNY",provider_name:"ChinaGo request desk",booking_url:"#"},
+    {id:"custom-trip",category:"Custom trip",title:"English-language China trip planning",price_from:null,currency:"CNY",provider_name:"ChinaGo request desk",booking_url:"#"}
   ]);
   let q=supabase.from("offers").select("*").eq("active",true).order("updated_at",{ascending:false}).limit(100);
   if(req.query.category) q=q.eq("category",req.query.category);
