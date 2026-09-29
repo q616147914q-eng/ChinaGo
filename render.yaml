@@ -7,7 +7,7 @@ services:
     startCommand: npm start
     envVars:
       - key: NODE_VERSION
-        value: 20
+        value: 22
       - key: OPENAI_API_KEY
         sync: false
       - key: OPENAI_MODEL
