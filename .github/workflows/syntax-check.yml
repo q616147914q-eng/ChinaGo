@@ -15,7 +15,7 @@ jobs:
           from pathlib import Path
           import re
           s=Path("public/index.html").read_text(encoding="utf-8")
-          m=re.search(r"<script[^>]*>(.*)</script>", s, re.I)
+          m=re.search(r"<script[^>]*>(.*)</script>", s, re.I|re.S)
           if not m: raise SystemExit("script not found")
           Path("/tmp/chinago.js").write_text(m.group(1), encoding="utf-8")
           PY
