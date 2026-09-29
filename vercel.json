@@ -3,5 +3,11 @@
   "framework": null,
   "buildCommand": null,
   "installCommand": "",
-  "outputDirectory": "public"
+  "outputDirectory": "public",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://chinago.onrender.com/api/:path*"
+    }
+  ]
 }
