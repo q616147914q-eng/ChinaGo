@@ -210,7 +210,17 @@ notes=${notes}`;
 });
 
 app.post("/api/chat", async (req,res)=>{
-  if(!requireAI(res)) return;
+  if(!openai){
+    const {message="",context={}}=req.body||{};
+    const q=String(message).trim().toLowerCase();
+    let answer="ChinaGo Starter Assistant: I can give general China travel guidance, but live/current information and AI answers require an OpenAI API key. For current prices, schedules, opening hours or rules, please verify with the official provider.";
+    if(q.includes("pay")||q.includes("alipay")||q.includes("wechat")) answer="For payments in China, prepare Alipay or WeChat Pay with a supported international card, and keep a backup payment method. Exact card support and limits can change, so verify in the app before travel.";
+    else if(q.includes("train")||q.includes("rail")) answer="For high-speed rail, keep your passport details consistent with the booking. Check the current timetable and station information before departure.";
+    else if(q.includes("visa")) answer="China entry rules depend on nationality, passport and travel purpose. Check the current Chinese embassy/consulate guidance for your passport before booking non-refundable travel.";
+    else if(q.includes("hotel")) answer="For hotels, ChinaGo can use Booking.com live inventory once the Booking.com partner credentials are connected. Until then, compare the hotel's location, cancellation terms, payment method and foreign-guest acceptance.";
+    res.json({answer,mode:"starter",live:false});
+    return;
+  }
   const {message="",context={}}=req.body||{};
   try {
     const response=await openai.responses.create({
@@ -229,7 +239,12 @@ User: ${message}`
 });
 
 app.post("/api/live-search", async (req,res)=>{
-  if(!requireAI(res)) return;
+  if(!openai){
+    const {query=""}=req.body||{};
+    if(!String(query).trim()) return res.status(400).json({error:"query required"});
+    res.json({answer:"Live search is not connected yet. ChinaGo can still provide general travel guidance, but current prices, schedules, opening hours and rules should be checked on the relevant official website or app.",searchedAt:null,mode:"starter",live:false});
+    return;
+  }
   const {query="",location=""}=req.body||{};
   if(!query.trim()) return res.status(400).json({error:"query required"});
   try {
