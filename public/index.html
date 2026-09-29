@@ -82,7 +82,7 @@ function solveCommand(){
   const box=$("#commandAnswer");box.innerHTML='<div class="answerCard"><b>ChinaGo is working on it…</b>Trying the practical assistant first.</div>';
   api("/api/chat",{method:"POST",body:JSON.stringify({message:q,context:{product:"ChinaGo Everyday China Companion",city:localStorage.getItem("cg_city")||"Beijing"}})})
   .then(d=>{box.innerHTML='<div class="answerCard"><b>Next steps</b>'+esc(d.answer||"Use one of the tools below.")+'</div>'})
-  .catch(()=>{box.innerHTML='<div class="answerCard"><b>Use the fastest tool</b>Choose Food, Move, Talk or Pay above. The assistant is currently unavailable.</div>'});
+  .catch(()=>{const ql=q.toLowerCase();let local="Start with the fastest tool below.";if(/taxi|driver|car|hotel/.test(ql))local="Open Move → enter your destination → use Driver card. Show the Chinese destination to the driver.";else if(/food|menu|eat|pork|peanut|spicy|chili/.test(ql))local="Open Food → filter ingredients/spice → Analyze menu or Show order card.";else if(/pay|alipay|wechat|payment|qr/.test(ql))local="Open Pay → use the setup checklist and keep a physical card or cash backup.";else if(/chinese|say|phrase|language|speak/.test(ql))local="Open Talk → describe what you need → create a phrase you can show.";else if(/help|police|doctor|hospital|emergency/.test(ql))local="Open Help for emergency numbers and ready-to-show Chinese phrases.";box.innerHTML='<div class="answerCard"><b>ChinaGo quick solve</b>'+local+'</div>'});
 }
 function installChinaGo(){
   if(window.__chinagoInstall){window.__chinagoInstall.prompt();window.__chinagoInstall=null}
