@@ -1,0 +1,45 @@
+name: ChinaGo Pages fallback
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare static site
+        run: |
+          mkdir -p _site
+          cp -R public/. _site/
+          python - <<'PY'
+          from pathlib import Path
+          p=Path("_site/index.html")
+          s=p.read_text()
+          s=s.replace('href="/manifest.webmanifest"', 'href="./manifest.webmanifest"')
+          s=s.replace('navigator.serviceWorker.register("/sw.js")', 'navigator.serviceWorker.register("./sw.js")')
+          p.write_text(s)
+          PY
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
