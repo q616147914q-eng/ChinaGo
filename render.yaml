@@ -18,3 +18,15 @@ services:
         sync: false
       - key: SUPABASE_SERVICE_ROLE_KEY
         sync: false
+      - key: BOOKING_COM_API_BASE
+        value: https://demandapi.booking.com/3.2
+      - key: BOOKING_COM_API_KEY
+        sync: false
+      - key: BOOKING_COM_AFFILIATE_ID
+        sync: false
+      - key: BOOKING_COM_ENABLE_SMART_SEARCH
+        value: "true"
+      - key: BOOKING_COM_DEFAULT_BOOKER_COUNTRY
+        value: gb
+      - key: ADMIN_EMAILS
+        sync: false
