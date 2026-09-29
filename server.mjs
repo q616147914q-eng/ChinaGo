@@ -44,6 +44,7 @@ app.use("/api/v9", rateLimit(40));
 app.use("/api/services", rateLimit(20));
 
 app.use(express.static("public"));
+app.get("/", (req, res) => res.sendFile("index.html", { root: process.cwd() }));
 
 const citiesFallback = [
   {slug:"beijing",name_en:"Beijing",name_zh:"北京",tagline:"Imperial history, modern China",tags:["history","food","first-trip"]},
