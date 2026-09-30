@@ -89,7 +89,33 @@ button:hover{transform:translateY(-1px)}
   .heroMain{min-height:430px}
 }
 </style>
-</head>
+<style id="chinago-ui-reference-v6">
+:root{--cg-bg:#f6f9fb;--cg-ink:#0b1724;--cg-muted:#6f8091;--cg-line:rgba(17,48,78,.10)}
+html{background:var(--cg-bg)}
+body{background:radial-gradient(900px 500px at 86% 4%,rgba(85,191,255,.16),transparent 62%),radial-gradient(700px 500px at 4% 38%,rgba(80,210,255,.07),transparent 60%),linear-gradient(180deg,#f9fbfc 0%,#f4f8fb 54%,#f7fafc 100%);color:var(--cg-ink)}
+body:after{opacity:.07!important;background-image:radial-gradient(rgba(16,50,80,.75) .5px,transparent .65px)!important;background-size:6px 6px!important;mix-blend-mode:multiply!important}
+.shell{width:min(1240px,100% - 48px)!important}
+.top{height:76px!important;background:rgba(255,255,255,.72)!important;border-bottom:1px solid rgba(14,45,72,.08)!important;box-shadow:0 10px 35px rgba(24,68,98,.04)!important}
+.brand{font-size:25px!important;letter-spacing:-.075em!important}.brand:before{width:0!important;margin:0!important;box-shadow:none!important}
+.nav{gap:5px!important}.nav button,.topAction{text-transform:none!important;letter-spacing:0!important;font-size:12px!important;border-radius:999px!important;color:#526477!important;padding:9px 14px!important}
+.nav button.active{background:#071621!important;color:#fff!important;box-shadow:0 7px 18px rgba(7,22,33,.16)!important}.nav button.active:after{display:none!important}
+.topAction{border:0!important;background:#071621!important;color:#fff!important}
+main{padding:34px 0 100px!important}.hero{display:block!important}
+.heroMain{min-height:550px!important;border-radius:30px!important;padding:56px 52px!important;background:linear-gradient(90deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.91) 42%,rgba(255,255,255,.18) 67%,rgba(255,255,255,0) 100%),url('/hero.svg') right center/cover no-repeat!important;border:1px solid rgba(20,61,92,.08)!important;box-shadow:0 28px 75px rgba(36,76,102,.12)!important}
+.heroMain:before,.heroMain:after{display:none!important}.heroMain .heroCopy{max-width:690px!important;position:relative;z-index:2}
+.eyebrow{color:#557087!important;font-size:10px!important;letter-spacing:.28em!important;font-family:ui-monospace,SFMono-Regular,Menlo,monospace!important}
+.hero h1{color:#071522!important;font-size:clamp(58px,7vw,96px)!important;line-height:.92!important;letter-spacing:-.085em!important;max-width:720px!important;margin:17px 0 18px!important;text-shadow:none!important}.hero h1:after{display:none!important}
+.hero p{color:#536779!important;font-size:17px!important;line-height:1.58!important;max-width:620px!important}
+.heroBtns{gap:10px!important;margin-top:20px!important}.cta{min-height:48px!important;border-radius:999px!important;padding:13px 21px!important;background:#071621!important;color:#fff!important;box-shadow:0 12px 25px rgba(7,22,33,.14)!important}.cta.dark{background:rgba(255,255,255,.7)!important;color:#0a1a28!important;border:1px solid rgba(20,61,92,.13)!important;box-shadow:none!important}
+.homeTools{grid-template-columns:repeat(8,minmax(0,1fr))!important;gap:12px!important;margin-top:28px!important}.toolTile{min-height:150px!important;padding:18px!important;border-radius:18px!important;background:rgba(255,255,255,.82)!important;border:1px solid var(--cg-line)!important;box-shadow:0 12px 32px rgba(36,76,102,.055)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}.toolTile:before,.toolTile:after{display:none!important}.toolTile .ico{font-size:25px!important}.toolTile h3{font-size:15px!important;color:#16334a!important;margin:8px 0 4px!important}.toolTile p{font-size:11px!important;line-height:1.45!important;color:#7a8c9b!important}
+.section{margin-top:42px!important;padding-top:0!important}.section:before{display:none!important}.sectionHead{padding-left:0!important;margin-bottom:16px!important}.sectionHead h2{font-size:28px!important;color:#0b1724!important}.sectionHead h2:before{display:none!important}
+.card,.panel,.serviceCard,.lifeCard,.moreItem,.quick,.dish,.phrase,.step{border-radius:18px!important;background:rgba(255,255,255,.84)!important;border:1px solid var(--cg-line)!important;box-shadow:0 14px 40px rgba(36,76,102,.05)!important}
+.primary:not(.ghost){border-radius:999px!important;background:#071621!important;border:0!important}.primary.ghost{border-radius:999px!important;background:rgba(255,255,255,.65)!important}
+.field input,.field select,.field textarea,.commandInput input,.search input,.chatBar input{border-radius:13px!important;background:#fff!important}
+@media(max-width:1050px){.homeTools{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:800px){.shell{width:min(100% - 24px,680px)!important}.top{height:66px!important}.heroMain{min-height:520px!important;padding:38px 28px!important;background:linear-gradient(90deg,rgba(255,255,255,.98),rgba(255,255,255,.78)),url('/hero.svg') center/cover no-repeat!important}.hero h1{font-size:clamp(48px,14vw,72px)!important}.homeTools{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:480px){.heroMain{min-height:500px!important;padding:30px 22px!important;border-radius:24px!important}.homeTools{gap:9px!important}.toolTile{min-height:140px!important;padding:15px!important}}
+</style></head>
 <body>
 <div id="app"></div><div id="toast" class="toast"></div>
 <script>
