@@ -1094,4 +1094,11 @@ body:after{opacity:.22;background-image:radial-gradient(rgba(20,30,35,.7) .45px,
 .bottom{backdrop-filter:blur(25px)!important;-webkit-backdrop-filter:blur(25px)!important}
 @media(max-width:640px){.heroMain{border-radius:11px!important}.hero h1{letter-spacing:-.085em}.toolTile{min-height:145px!important}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+/* ChinaGo hero visual refinement */
+.refHeroBg{background-size:100% 100%,auto 100%!important;background-position:center center,right center!important;background-repeat:no-repeat!important;filter:saturate(1.06) contrast(1.02)!important}
+.refHero:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,0) 35%,rgba(238,246,252,.12) 100%);z-index:1}
+.refHeroContent{z-index:3!important}
+.refJourney,.journeyCard{z-index:4!important}
+@media(max-width:900px){.refHeroBg{background-size:cover,cover!important;background-position:center,right center!important}}
 </style>
